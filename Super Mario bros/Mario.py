@@ -4,7 +4,6 @@ import GameFramework
 class Mario:
 	# State
 	LEFT_IDLE, RIGHT_IDLE, LEFT_RUN, RIGHT_RUN,	LEFT_JUMP, RIGHT_JUMP, DIE = range(7)
-
 	JUMP = 900
 	GRAVITY = 3000
 
@@ -42,19 +41,21 @@ class Mario:
 		self.fidx = 0
 		self.time = 0
 		self.jump_speed = 0
-		self.prev_state = None
 		self.state = Mario.RIGHT_IDLE
 		self.image = load_image("resource/Mario.png")
+		self.is_collide = False
 
 	def draw(self):
 		self.image.clip_draw(*Mario.IMAGE_RECT[self.state][self.fidx], self.x, self.y, 60, 60)
+
+	def set_background(self, bg):
+		self.set_background = bg
 
 	def update(self):
 		print(self.state)
 		self.x += self.speed * self.dx
 		self.fidx = int(self.time * 7) % len(Mario.IMAGE_RECT[self.state])
 		self.time += GameFramework.delta_time
-
 		if self.state in [Mario.RIGHT_JUMP, Mario.LEFT_JUMP]:
 			self.y += self.falling_speed * GameFramework.delta_time
 			self.falling_speed -= Mario.GRAVITY * GameFramework.delta_time
@@ -65,7 +66,6 @@ class Mario:
 					self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
 				elif self.state == Mario.RIGHT_JUMP:
 					self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
-
 
 	def jump(self):
 		if self.state in [Mario.LEFT_IDLE, Mario.LEFT_RUN]:

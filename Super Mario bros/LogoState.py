@@ -5,7 +5,7 @@ import TitleState
 def enter():
 	global background, elapsed
 
-	background = load_image("Image/KPU.png")
+	background = load_image("resource/KPU.png")
 	elapsed = 0
 
 def update():

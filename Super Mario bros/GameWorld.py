@@ -1,27 +1,27 @@
 from pico2d import *
 import GameFramework
 
-objects = [[], [], [], []] # Tile, Coin, Ladder, Mario
+stage1_obj = [[],[],[],[]]
 trashcan = []
 
 def add(layer_index, object):
-	objects[layer_index].append(object)
+	stage1_obj[layer_index].append(object)
 
 def remove(object):
 	trashcan.append(object)
 
 def update():
-	for layer_objects in objects:
+	for layer_objects in stage1_obj:
 		for object in layer_objects:
 			object.update()
 
-	counts = list(map(len, objects))
+	counts = list(map(len, stage1_obj))
 
 	if (len(trashcan) > 0):
 		empty_trashcan()
 
 def draw():
-	for layer_objects in objects:
+	for layer_objects in stage1_obj:
 		for object in layer_objects:
 			object.draw()
 
@@ -29,4 +29,4 @@ def empty_trashcan():
 	global trashcan
 
 	for object in trashcan:
-		objects.remove(object)
+		stage1_obj.remove(object)

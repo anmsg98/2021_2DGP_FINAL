@@ -1,5 +1,4 @@
 [
-  {"name": "background", "layer_index": 0, "x": 0, "y": 0, "w": 800, "h": 600},
   {"name": "cloud", "layer_index": 0, "x": 400, "y": 500, "w": 120, "h": 40},
   {"name": "pipe", "layer_index": 1, "x": 700, "y": 60, "w": 100, "h": 100},
   {"name": "block", "layer_index": 1, "x": 275, "y": 225, "w": 50, "h": 50},

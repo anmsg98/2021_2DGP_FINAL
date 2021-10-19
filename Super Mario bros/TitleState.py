@@ -5,7 +5,7 @@ import GameState_1
 def enter():
 	global background
 
-	background = load_image("Image/TitleState.png")
+	background = load_image("resource/Title.png")
 
 def update():
 	pass

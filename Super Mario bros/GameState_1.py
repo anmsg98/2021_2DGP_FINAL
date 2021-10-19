@@ -6,11 +6,11 @@ import GameSprite
 import json
 
 def enter():
-	global mario, ground, cloud, pipe
-
+	global mario, ground, cloud, pipe, background
 	mario = Mario()
 	GameWorld.add(3, mario)
-	
+
+
 	with open("JSON/Stage.json") as file:
 		data = json.load(file)
 
