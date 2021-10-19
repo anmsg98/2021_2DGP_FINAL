@@ -1,6 +1,6 @@
 from pico2d import *
 import GameFramework
-import GameState_1
+import GameState
 
 def enter():
 	global background
@@ -21,7 +21,7 @@ def handle_event(event):
 	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
 		GameFramework.quit()
 	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-		GameFramework.push(GameState_1)
+		GameFramework.push(GameState)
 
 def exit():
 	global background
