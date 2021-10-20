@@ -3,7 +3,7 @@ import GameFramework
 
 class Mario:
 	# State
-	LEFT_IDLE, RIGHT_IDLE, LEFT_RUN, RIGHT_RUN,	LEFT_JUMP, RIGHT_JUMP = range(6)
+	LEFT_IDLE, RIGHT_IDLE, LEFT_RUN, RIGHT_RUN,	LEFT_JUMP, RIGHT_JUMP, RIGHT_DRIFT, LEFT_DRIFT = range(8)
 	JUMP = 900
 	GRAVITY = 3000
 	MAX_FIRE = 10
@@ -18,7 +18,7 @@ class Mario:
 	KEY_LIFE1 = (SDL_KEYDOWN, SDLK_1)
 	KEY_LIFE2 = (SDL_KEYDOWN, SDLK_2)
 	KEY_LIFE3 = (SDL_KEYDOWN, SDLK_3)
-	KEY_FIRE = (SDL_KEYDOWN, SDLK_w)
+	KEY_FIRE = (SDL_KEYDOWN, SDLK_LCTRL)
 	KEY_STAR = (SDL_KEYDOWN, SDLK_e)
 
 	IMAGE_LIFE1 = [
@@ -28,13 +28,17 @@ class Mario:
 		[[480, 870, 29, 30], [542, 870, 25, 30], [598, 870, 33, 30]],  # Right Run
 		[[57, 870, 34, 30]],  # Left Jump
 		[[717, 870, 34, 30]],  # Right Jump
+		[[120, 870, 29, 30]],  # Left Drift
+		[[661, 870, 29, 30]],  # Right Drift
 		# STAR
 		[[360, 547, 30, 30], [360, 502, 30, 30], [360, 457, 30, 30]],  # Left Idle
 		[[420, 547, 30, 30], [420, 502, 30, 30], [420, 457, 30, 30]],  # Right Idle
 		[[298, 547, 29, 30], [240, 547, 25, 30], [175, 547, 35, 30]],  # Left Run
 		[[480, 547, 29, 30], [542, 547, 25, 30], [598, 547, 33, 30]],  # Right Run
 		[[57, 547, 34, 30], [57, 502, 34, 30], [57, 457, 34, 30]],  # Left Jump
-		[[717, 547, 34, 30], [717, 502, 34, 30], [717, 457, 34, 30]]  # Right Jump
+		[[717, 547, 34, 30], [717, 502, 34, 30], [717, 457, 34, 30]],  # Right Jump
+		[[119, 547, 29, 30], [120, 502, 29, 30], [120, 457, 29, 30]],  # Left Drift
+		[[661, 547, 29, 30], [661, 502, 29, 30], [661, 457, 29, 30]]  # Right Drift
 	]
 	IMAGE_LIFE2 = [
 		[[359, 732, 33, 64]],  # Left Idle
@@ -43,15 +47,17 @@ class Mario:
 		[[476, 732, 33, 64], [538, 732, 30, 64], [597, 732, 33, 64]],  # Right Run
 		[[59, 732, 32, 64]],  # Left Jump
 		[[716, 732, 32, 64]],  # Right Jump
+		[[658, 732, 33, 64]],  # Left Drift
+		[[119, 732, 33, 64]],  # Right Drift
 		# STAR
 		[[359, 380, 33, 64], [359, 305, 33, 64], [359, 230, 33, 64]],  # Left Idle
 		[[417, 380, 33, 64], [417, 305, 33, 64], [417, 230, 33, 64]],  # Right Idle
 		[[298, 380, 33, 64], [240, 380, 30, 64], [179, 380, 33, 64]],  # Left Run
 		[[476, 380, 33, 64], [538, 380, 30, 64], [597, 380, 33, 64]],  # Right Run
 		[[59, 380, 32, 64], [59, 305, 32, 64], [59, 230, 32, 64]],  # Left Jump
-		[[716, 380, 32, 64], [716, 305, 32, 64], [716, 230, 32, 64]]  # Right Jump
-
-
+		[[716, 380, 32, 64], [716, 305, 32, 64], [716, 230, 32, 64]],  # Right Jump
+		[[658, 380, 33, 64], [658, 305, 33, 64], [658, 230, 33, 64]], # Left Drift
+		[[119, 380, 33, 64], [119, 305, 33, 64], [119, 230, 33, 64]]  # Right Drift
 	]
 	IMAGE_FIREMAN = [
 		[[359, 592, 33, 64]],  # Left Idle
@@ -59,14 +65,18 @@ class Mario:
 		[[303, 592, 33, 64], [255, 592, 30, 64], [203, 592, 33, 64], [153, 592, 33, 64]],  # Left Run
 		[[472, 592, 33, 64], [524, 592, 30, 64], [573, 592, 33, 64], [622, 592, 33, 64]],  	# Right Run
 		[[52, 592, 32, 64]],  # Left Jump
-		[[723, 592, 32, 64]], # Right Jump
+		[[723, 592, 32, 64]],  # Right Jump
+		[[673, 592, 33, 64]],  # LEFT Drift
+		[[103, 592, 33, 64]],  # Right Drift
 		# STAR
 		[[359, 160, 33, 64], [359, 85, 33, 64], [359, 10, 33, 64]],  # Left Idle
 		[[417, 160, 33, 64], [417, 85, 33, 64], [417, 10, 33, 64]],  # Right Idle
 		[[303, 160, 33, 64], [255, 160, 30, 64], [203, 160, 33, 64], [153, 160, 33, 64]],  # Left Run
 		[[472, 160, 33, 64], [524, 160, 30, 64], [573, 160, 33, 64], [622, 160, 33, 64]],  	# Right Run
 		[[52, 160, 32, 64], [52, 85, 32, 64], [52, 10, 32, 64]],  # Left Jump
-		[[723, 160, 32, 64], [723, 85, 32, 64], [723, 10, 32, 64]]  # Right Jump
+		[[723, 160, 32, 64], [723, 85, 32, 64], [723, 10, 32, 64]],  # Right Jump
+		[[673, 160, 33, 64], [673, 85, 33, 64], [673, 10, 33, 64]],  # Left Drift
+		[[103, 160, 33, 64], [103, 85, 33, 64], [103, 10, 33, 64]]  # Right Drift
 	]
 	IMAGE_STAR = [
 
@@ -78,7 +88,10 @@ class Mario:
 		self.dx, self.dy = 0, 0
 		self.fidx = 0
 		self.time = 0
+		self.driftr, self.driftl = True, True
+		self.jumping = False
 		self.jump_speed = 0
+		self.accel = 0.0
 		self.speed = 3
 		self.state = Mario.RIGHT_IDLE
 		self.life = 0
@@ -100,17 +113,17 @@ class Mario:
 					self.is_fire[i] = False
 		if self.life == 0:
 			if self.star == True:
-				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state+6][self.fidx], self.x, self.y, 40, 40)
+				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state+8][self.fidx], self.x, self.y, 40, 40)
 			else:
 				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state][self.fidx], self.x, self.y, 40, 40)
 		elif self.life == 1:
 			if self.star == True:
-				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state+6][self.fidx], self.x, self.y, 40, 80)
+				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state+8][self.fidx], self.x, self.y, 40, 80)
 			else:
 				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state][self.fidx], self.x, self.y, 40, 80)
 		elif self.life == 2:
 			if self.star == True:
-				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state+6][self.fidx], self.x, self.y, 40, 80)
+				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state+8][self.fidx], self.x, self.y, 40, 80)
 			else:
 				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state][self.fidx], self.x, self.y, 40, 80)
 
@@ -118,32 +131,71 @@ class Mario:
 		self.set_background = bg
 
 	def update(self):
-		self.x += self.speed * self.dx
+		if self.dx > 0:
+			self.accel += 0.02
+			self.x += self.speed * self.dx * self.accel
+			if self.accel > 1.0:
+				self.accel = 1.0
+			if self.accel < 0.0:
+				if self.accel >= -0.2:
+					self.accel += 0.01
+					self.state = Mario.RIGHT_RUN
+				if self.driftl == True:
+					if self.state not in [Mario.LEFT_JUMP, Mario.RIGHT_JUMP]:
+						self.state = Mario.LEFT_DRIFT
+					self.driftl, self.driftr = False, True
+		elif self.dx < 0:
+			self.x -= self.speed * self.dx * self.accel
+			self.accel -= 0.02
+			if self.accel < -1.0:
+				self.accel = -1.0
+			if self.accel > 0.0:
+				if self.accel <= 0.2:
+					self.accel -= 0.01
+					self.state = Mario.LEFT_RUN
+				if self.driftr == True:
+					if self.state not in [Mario.LEFT_JUMP, Mario.RIGHT_JUMP]:
+						self.state = Mario.RIGHT_DRIFT
+					self.driftl, self.driftr = True, False
+		elif self.dx == 0 and self.accel != 0.0:
+			if self.accel <= 0.0:
+				self.accel += 0.01
+				self.x += self.speed * self.accel
+				if self.accel > 0.0:
+					self.accel = 0.0
+			else:
+				self.accel -= 0.01
+				self.x += self.speed * self.accel
+				if self.accel < 0.0:
+					self.accel = 0.0
+
+
 		for i in range(Mario.MAX_FIRE):
 			if self.is_fire[i] == True:
-				self.fidfx[i] = (self.fidfx[i] + 1) % 4
+				self.fidfx[i] = int(self.time * 14) % len(Mario.IMAGE_FIRE)
 				self.fx[i] += self.speed * self.fdx[i] * 2
 		if self.life == 0:
 			if self.star == True:
-				self.fidx = int(self.time * 7) % len(Mario.IMAGE_LIFE1[self.state+6])
+				self.fidx = int(self.time * 10) % len(Mario.IMAGE_LIFE1[self.state+8])
 			else:
-				self.fidx = int(self.time * 7) % len(Mario.IMAGE_LIFE1[self.state])
+				self.fidx = int(self.time * 10) % len(Mario.IMAGE_LIFE1[self.state])
 		elif self.life == 1:
 			if self.star == True:
-				self.fidx = int(self.time * 7) % len(Mario.IMAGE_LIFE2[self.state+6])
+				self.fidx = int(self.time * 10) % len(Mario.IMAGE_LIFE2[self.state+8])
 			else:
-				self.fidx = int(self.time * 7) % len(Mario.IMAGE_LIFE2[self.state])
+				self.fidx = int(self.time * 10) % len(Mario.IMAGE_LIFE2[self.state])
 		elif self.life == 2:
 			if self.star == True:
-				self.fidx = int(self.time * 7) % len(Mario.IMAGE_FIREMAN[self.state+6])
+				self.fidx = int(self.time * 10) % len(Mario.IMAGE_FIREMAN[self.state+8])
 			else:
-				self.fidx = int(self.time * 7) % len(Mario.IMAGE_LIFE2[self.state])
+				self.fidx = int(self.time * 10) % len(Mario.IMAGE_LIFE2[self.state])
 		self.time += GameFramework.delta_time
-		if self.state in [Mario.RIGHT_JUMP, Mario.LEFT_JUMP]:
+		if self.jumping == True:
 			self.y += self.falling_speed * GameFramework.delta_time
 			self.falling_speed -= Mario.GRAVITY * GameFramework.delta_time
 			if self.life == 0:
 				if self.y < 80:
+					self.jumping = False
 					self.y = 80
 					if self.state == Mario.LEFT_JUMP:
 						self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
@@ -151,6 +203,7 @@ class Mario:
 						self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
 			else:
 				if self.y < 100:
+					self.jumping = False
 					self.y = 100
 					if self.state == Mario.LEFT_JUMP:
 						self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
@@ -158,11 +211,11 @@ class Mario:
 						self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
 
 	def jump(self):
-		if self.state in [Mario.LEFT_IDLE, Mario.LEFT_RUN]:
+		if self.state in [Mario.LEFT_IDLE, Mario.LEFT_RUN, Mario.RIGHT_DRIFT]:
 			self.state = Mario.LEFT_JUMP
 			self.falling_speed = Mario.JUMP
 			# print(get_time())
-		elif self.state in [Mario.RIGHT_IDLE, Mario.RIGHT_RUN]:
+		elif self.state in [Mario.RIGHT_IDLE, Mario.RIGHT_RUN, Mario.LEFT_DRIFT]:
 			self.state = Mario.RIGHT_JUMP
 			self.falling_speed = Mario.JUMP
 			# print(get_time())
@@ -189,6 +242,7 @@ class Mario:
 			self.update_delta(*Mario.KEY_MAP[pair])
 		elif pair == Mario.KEY_JUMP:
 			self.jump()
+			self.jumping = True
 		elif pair == Mario.KEY_LIFE1:
 			self.life = 0
 			self.y = 80

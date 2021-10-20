@@ -16,7 +16,6 @@ def load():
 			data = json.load(file)
 
 			for name in data:
-				print(name)
 				sprite_rects[name] = tuple(data[name])
 
 class Sprite:
