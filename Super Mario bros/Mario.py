@@ -106,6 +106,7 @@ class Mario:
 		self.is_fire = [False for i in range(Mario.MAX_FIRE)]
 
 	def draw(self):
+		draw_rectangle(*self.get_bb())
 		for i in range(Mario.MAX_FIRE):
 			if self.is_fire[i] == True:
 				self.shoot_image.clip_draw(*Mario.IMAGE_FIRE[self.fidfx[i]], self.fx[i], self.fy[i])
@@ -219,6 +220,19 @@ class Mario:
 			self.state = Mario.RIGHT_JUMP
 			self.falling_speed = Mario.JUMP
 			# print(get_time())
+
+	def get_bb(self):
+		(x, y) = self.x, self.y
+		if self.life == 0:
+			(w, h) = (Mario.IMAGE_LIFE1[self.state][self.fidx % len(Mario.IMAGE_LIFE1[self.state])][2] // 2, Mario.IMAGE_LIFE1[self.state][self.fidx % len(Mario.IMAGE_LIFE1[self.state])][3] // 2)
+		else:
+			(w, h) = (Mario.IMAGE_LIFE2[self.state][self.fidx % len(Mario.IMAGE_LIFE1[self.state])][2] // 2, Mario.IMAGE_LIFE2[self.state][self.fidx % len(Mario.IMAGE_LIFE2[self.state])][3] // 2)
+		left = x - w
+		bottom = y - h
+		right = x + w
+		top = y + h
+
+		return (left, bottom, right, top)
 
 	def update_delta(self, ddx, ddy):
 		dx, dy = self.dx, self.dy

@@ -1,15 +1,17 @@
 from pico2d import *
 from Mario import *
 import GameFramework
+import GameObject
 import GameWorld
 import GameSprite
 import json
 
 def enter():
 	global mario, ground, cloud, pipe, background
+	GameWorld.game_init(["bg", "box", "itembox", "coin", "goomba", "mario"])
 	GameSprite.load()
 	mario = Mario()
-	GameWorld.add(2, mario)
+	GameWorld.add(5, mario)
 
 	with open("JSON/Stage.json") as file:
 		data = json.load(file)
@@ -17,10 +19,10 @@ def enter():
 	for info in data:
 		obj = GameSprite.createObject(info)
 		GameWorld.add(info["layer_index"], obj)
-
+	GameWorld.curr_obj = GameWorld.stage_obj
 def update():
 	GameWorld.update()
-
+	check_and_handle_collision()
 def draw():
 	GameWorld.draw()
 
@@ -33,6 +35,15 @@ def handle_event(event):
 		GameFramework.pop()
 
 	mario.handle_event(event)
+
+
+def check_and_handle_collision():
+	global mario
+	for goomba in GameWorld.objects_at(GameWorld.layer.goomba):
+		if (GameObject.collides_box(mario, goomba)):
+			goomba.is_collide = True
+
+
 
 def exit():
 	pass
