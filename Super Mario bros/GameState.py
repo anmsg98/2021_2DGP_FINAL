@@ -7,6 +7,7 @@ import json
 
 def enter():
 	global mario, ground, cloud, pipe, background
+	GameSprite.load()
 	mario = Mario()
 	GameWorld.add(2, mario)
 
@@ -14,8 +15,8 @@ def enter():
 		data = json.load(file)
 
 	for info in data:
-		object = GameSprite.Sprite(info["name"], info["x"], info["y"], info["w"], info["h"])
-		GameWorld.add(info["layer_index"], object)
+		obj = GameSprite.createObject(info)
+		GameWorld.add(info["layer_index"], obj)
 
 def update():
 	GameWorld.update()

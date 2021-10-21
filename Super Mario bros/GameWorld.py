@@ -30,3 +30,5 @@ def empty_trashcan():
 
 	for object in trashcan:
 		stage_obj.remove(object)
+
+	trashcan = []

@@ -9,7 +9,10 @@
   {"name": "block", "layer_index": 1, "x": 275, "y": 225, "w": 50, "h": 50},
   {"name": "block", "layer_index": 1, "x": 375, "y": 225, "w": 50, "h": 50},
   {"name": "block", "layer_index": 1, "x": 475, "y": 225, "w": 50, "h": 50},
-  {"name": "item_block", "layer_index": 1, "x": 325, "y": 225, "w": 50, "h": 50},
-  {"name": "item_block", "layer_index": 1, "x": 425, "y": 225, "w": 50, "h": 50},
-  {"name": "item_block", "layer_index": 1, "x": 375, "y": 350, "w": 50, "h": 50}
+  {"name": "MysteryBox", "layer_index": 1, "x": 325, "y": 225, "w": 50, "h": 50},
+  {"name": "MysteryBox", "layer_index": 1, "x": 425, "y": 225, "w": 50, "h": 50},
+  {"name": "MysteryBox", "layer_index": 1, "x": 375, "y": 350, "w": 50, "h": 50},
+  {"name": "Coin", "layer_index": 1, "x": 443, "y": 275, "w": null, "h": null},
+  {"name": "Coin", "layer_index": 1, "x": 343, "y": 275, "w": null, "h": null},
+  {"name": "Coin", "layer_index": 1, "x": 393, "y": 400, "w": null, "h": null}
 ]
