@@ -43,7 +43,7 @@ class Platform:
 
 	def draw(self):
 		sprite_image.clip_draw_to_origin(*self.rect, *self.pos, *self.size)
-
+		draw_rectangle(*self.get_bb())
 	def update(self):
 		pass
 

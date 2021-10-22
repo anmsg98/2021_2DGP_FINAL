@@ -8,7 +8,7 @@ import json
 
 def enter():
 	global mario, ground, cloud, pipe, background
-	GameWorld.game_init(["bg", "box", "itembox", "coin", "goomba", "mario"])
+	GameWorld.game_init(["bg", "platform", "itembox", "coin", "goomba", "mario"])
 	GameSprite.load()
 	mario = Mario()
 	GameWorld.add(5, mario)
