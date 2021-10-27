@@ -177,23 +177,32 @@ class Mario:
 
 		for platform in GameWorld.objects_at(GameWorld.layer.platform):
 			(left, bottom, right, top) = platform.get_bb()
+			print(GameObject.collides_box(self, platform), self.state)
 			if (GameObject.collides_box(self, platform)):
-				if rh >= left and lh < left:
-					self.x -= (rh-left)+1
-					self.state = Mario.RIGHT_IDLE
+				if rh >= left and lh < left and head > bottom and foot < top:
+					self.x -= (rh - left)
 					self.accel = 0
-				if lh <= right and rh > right:
-					self.x += (right-lh)-1
-					self.state = Mario.LEFT_IDLE
+					if self.state in [Mario.RIGHT_RUN, Mario.RIGHT_IDLE]:
+						self.state = Mario.RIGHT_IDLE
+
+				elif lh <= right and rh > right and head > bottom and foot < top:
+					self.x -= (rh - left)
 					self.accel = 0
-				if head >= bottom and foot < bottom and (rh > left or lh < right):
-					self.y -= (head-bottom)
+					if self.state in [Mario.LEFT_RUN, Mario.LEFT_IDLE]:
+						self.state = Mario.LEFT_IDLE
+
+				elif head > bottom and foot < bottom and (rh >= left or lh <= right):
+					self.y -= (head-bottom) + 1
 					self.falling_speed = 0
-				if foot <= top and head > top and (rh > left or lh < right):
-					self.y += (top-foot)
+
+				elif foot < top and head > top and (rh >= left or lh <= right):
+					if self.state in [Mario.RIGHT_JUMP, Mario.RIGHT_RUN, Mario.LEFT_DRIFT]:
+						self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
+					if self.state in [Mario.LEFT_JUMP, Mario.LEFT_RUN, Mario.RIGHT_DRIFT]:
+						self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
+					self.y += (top - foot)
 					self.falling_speed = 0
-					self.state = Mario.LEFT_RUN if self.dx < 0 else \
-						Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
+
 
 
 		# if (platform_h != None):
@@ -281,9 +290,6 @@ class Mario:
 		top = y + h
 
 		return (left, bottom, right, top)
-
-	# 바운딩박스 위에서 걷기
-
 
 
 	def update_delta(self, ddx, ddy):
