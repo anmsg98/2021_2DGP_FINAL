@@ -6,6 +6,8 @@ import GameWorld
 import GameSprite
 import json
 
+# bg_image = load_image("resource/BG.png")
+
 def enter():
 	global mario, ground, cloud, pipe, background
 	GameWorld.game_init(["bg", "platform", "itembox", "coin", "goomba", "mario"])
@@ -24,6 +26,7 @@ def update():
 	GameWorld.update()
 	check_and_handle_collision()
 def draw():
+	# bg_image.clip_draw_to_origin(0, 0, 20, 20, 3375, 240)
 	GameWorld.draw()
 
 def handle_event(event):

@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0ed03845-3be7-4387-a8a8-71c306a9ef3a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameState.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSON/ObjectRect.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSON/ObjectRect.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JSON/Stage.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSON/Stage.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mario.py" afterDir="false" />
     </list>

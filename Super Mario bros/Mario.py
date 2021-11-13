@@ -175,57 +175,36 @@ class Mario:
 
 		(lh, foot, rh, head) = self.get_bb()
 
-		for platform in GameWorld.objects_at(GameWorld.layer.platform):
-			(left, bottom, right, top) = platform.get_bb()
-			print(GameObject.collides_box(self, platform), self.state)
-			if (GameObject.collides_box(self, platform)):
-				if rh >= left and lh < left and head > bottom and foot < top:
-					self.x -= (rh - left)
-					self.accel = 0
-					if self.state in [Mario.RIGHT_RUN, Mario.RIGHT_IDLE]:
-						self.state = Mario.RIGHT_IDLE
-
-				elif lh <= right and rh > right and head > bottom and foot < top:
-					self.x -= (rh - left)
-					self.accel = 0
-					if self.state in [Mario.LEFT_RUN, Mario.LEFT_IDLE]:
-						self.state = Mario.LEFT_IDLE
-
-				elif head > bottom and foot < bottom and (rh >= left or lh <= right):
-					self.y -= (head-bottom) + 1
-					self.falling_speed = 0
-
-				elif foot < top and head > top and (rh >= left or lh <= right):
-					if self.state in [Mario.RIGHT_JUMP, Mario.RIGHT_RUN, Mario.LEFT_DRIFT]:
-						self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
-					if self.state in [Mario.LEFT_JUMP, Mario.LEFT_RUN, Mario.RIGHT_DRIFT]:
-						self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
-					self.y += (top - foot)
-					self.falling_speed = 0
-
-
-
-		# if (platform_h != None):
-		# 	(left, bottom, right, top) = platform_h.get_bb()
+		# for platform in GameWorld.objects_at(GameWorld.layer.platform):
+		# 	(left, bottom, right, top) = platform.get_bb()
+		# 	print(GameObject.collides_box(self, platform), self.state)
+		# 	if (GameObject.collides_box(self, platform)):
+		# 		if rh >= left and lh < left and head > bottom and foot < top:
+		# 			self.x -= (rh - left)
+		# 			self.accel = 0
+		# 			if self.state in [Mario.RIGHT_RUN, Mario.RIGHT_IDLE]:
+		# 				self.state = Mario.RIGHT_IDLE
 		#
-		# 	if (self.state == Mario.LEFT_IDLE or self.state == Mario.LEFT_RUN or self.state == Mario.RIGHT_DRIFT):
-		# 		if (foot > top):
-		# 			self.state = Mario.LEFT_JUMP
+		# 		elif lh <= right and rh >= right and head > bottom and foot < top:
+		# 			self.x -= (rh - left)
+		# 			self.accel = 0
+		# 			if self.state in [Mario.LEFT_RUN, Mario.LEFT_IDLE]:
+		# 				self.state = Mario.LEFT_IDLE
+		#
+		# 		elif head > bottom and foot < bottom and (rh >= left or lh <= right):
+		# 			self.y -= (head-bottom) + 1
 		# 			self.falling_speed = 0
-		# 	elif (self.state == Mario.RIGHT_IDLE or self.state == Mario.RIGHT_RUN or self.state == Mario.LEFT_DRIFT):
-		# 		if (foot > top):
-		# 			self.state = Mario.RIGHT_JUMP
-		# 			self.falling_speed = 0
-		# 	elif (self.state == Mario.LEFT_JUMP):
-		# 		if (self.falling_speed < 0 and int(foot) <= top):
+		#
+		# 		elif foot < top and head > top and (rh >= left or lh <= right):
+		# 			if self.state in [Mario.RIGHT_JUMP, Mario.RIGHT_RUN, Mario.LEFT_DRIFT]:
+		# 				self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
+		# 			if self.state in [Mario.LEFT_JUMP, Mario.LEFT_RUN, Mario.RIGHT_DRIFT]:
+		# 				self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
 		# 			self.y += (top - foot)
-		# 			self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
 		# 			self.falling_speed = 0
-		# 	elif (self.state == Mario.RIGHT_JUMP):
-		# 		if (self.falling_speed < 0 and int(foot) <= top):
-		# 			self.y += (top - foot)
-		# 			self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
-		# 			self.falling_speed = 0
+		#
+
+
 
 
 		for i in range(Mario.MAX_FIRE):
@@ -251,22 +230,22 @@ class Mario:
 		if self.state in [Mario.LEFT_JUMP, Mario.RIGHT_JUMP]:
 			self.y += self.falling_speed * GameFramework.delta_time
 			self.falling_speed -= Mario.GRAVITY * GameFramework.delta_time
-		# if self.life == 0:
-		# 	if self.y < 80:
-		# 		self.jumping = False
-		# 		self.y = 80
-		# 		if self.state == Mario.LEFT_JUMP:
-		# 			self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
-		# 		elif self.state == Mario.RIGHT_JUMP:
-		# 			self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
-		# else:
-		# 	if self.y < 100:
-		# 		self.jumping = False
-		# 		self.y = 100
-		# 		if self.state == Mario.LEFT_JUMP:
-		# 			self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
-		# 		elif self.state == Mario.RIGHT_JUMP:
-		# 			self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
+		if self.life == 0:
+			if self.y < 80:
+				self.jumping = False
+				self.y = 80
+				if self.state == Mario.LEFT_JUMP:
+					self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
+				elif self.state == Mario.RIGHT_JUMP:
+					self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
+		else:
+			if self.y < 100:
+				self.jumping = False
+				self.y = 100
+				if self.state == Mario.LEFT_JUMP:
+					self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
+				elif self.state == Mario.RIGHT_JUMP:
+					self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
 
 	def jump(self):
 		if self.state in [Mario.LEFT_IDLE, Mario.LEFT_RUN, Mario.RIGHT_DRIFT]:
