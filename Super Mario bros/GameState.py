@@ -1,4 +1,5 @@
 from pico2d import *
+from background import FixedBackground as Background
 from Mario import *
 import GameFramework
 import GameObject
@@ -6,7 +7,6 @@ import GameWorld
 import GameSprite
 import json
 
-# bg_image = load_image("resource/BG.png")
 
 def enter():
 	global mario, ground, cloud, pipe, background
@@ -15,18 +15,24 @@ def enter():
 	mario = Mario()
 	GameWorld.add(5, mario)
 
+	background = Background()
+	GameWorld.add(0, background)
+
+	background.set_center_object(mario)
+	mario.set_background(background)
+
 	with open("JSON/Stage.json") as file:
 		data = json.load(file)
 
 	for info in data:
 		obj = GameSprite.createObject(info)
 		GameWorld.add(info["layer_index"], obj)
+		obj.set_background(background)
 	GameWorld.curr_obj = GameWorld.stage_obj
 def update():
 	GameWorld.update()
 	check_and_handle_collision()
 def draw():
-	# bg_image.clip_draw_to_origin(0, 0, 20, 20, 3375, 240)
 	GameWorld.draw()
 
 def handle_event(event):

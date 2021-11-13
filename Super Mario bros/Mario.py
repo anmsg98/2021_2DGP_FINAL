@@ -90,15 +90,17 @@ class Mario:
 		self.dx, self.dy = 0, 0
 		self.fidx = 0
 		self.time = 0
+		self.cw, self.ch = get_canvas_width(), get_canvas_height()
 		self.driftr, self.driftl = True, True
 		self.jumping = False
 		self.jump_speed = 0
 		self.accel = 0.0
-		self.speed = 3
+		self.speed = 10
 		self.falling_speed = 0
 		self.state = Mario.RIGHT_IDLE
 		self.life = 0
 		self.star = False
+		self.bg = None
 		self.image = load_image("resource/Mario.png")
 
 		self.fx, self.fy = [0 for i in range(Mario.MAX_FIRE)], [0 for i in range(Mario.MAX_FIRE)]
@@ -109,6 +111,7 @@ class Mario:
 		self.is_fire = [False for i in range(Mario.MAX_FIRE)]
 
 	def draw(self):
+		cx, cy = self.x - self.bg.window_left, self.y - self.bg.window_bottom
 		draw_rectangle(*self.get_bb())
 		for i in range(Mario.MAX_FIRE):
 			if self.is_fire[i] == True:
@@ -117,22 +120,22 @@ class Mario:
 					self.is_fire[i] = False
 		if self.life == 0:
 			if self.star == True:
-				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state+8][self.fidx], self.x, self.y, 40, 40)
+				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state+8][self.fidx], cx, cy, 40, 40)
 			else:
-				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state][self.fidx], self.x, self.y, 40, 40)
+				self.image.clip_draw(*Mario.IMAGE_LIFE1[self.state][self.fidx], cx, cy, 40, 40)
 		elif self.life == 1:
 			if self.star == True:
-				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state+8][self.fidx], self.x, self.y, 40, 80)
+				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state+8][self.fidx], cx, cy, 40, 80)
 			else:
-				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state][self.fidx], self.x, self.y, 40, 80)
+				self.image.clip_draw(*Mario.IMAGE_LIFE2[self.state][self.fidx], cx, cy, 40, 80)
 		elif self.life == 2:
 			if self.star == True:
-				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state+8][self.fidx], self.x, self.y, 40, 80)
+				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state+8][self.fidx], cx, cy, 40, 80)
 			else:
-				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state][self.fidx], self.x, self.y, 40, 80)
+				self.image.clip_draw(*Mario.IMAGE_FIREMAN[self.state][self.fidx], cx, cy, 40, 80)
 
 	def set_background(self, bg):
-		self.set_background = bg
+		self.bg = bg
 
 	def update(self):
 		if self.dx > 0:
@@ -204,8 +207,8 @@ class Mario:
 		# 			self.falling_speed = 0
 		#
 
-
-
+		self.x = clamp(0, self.x, self.bg.image.w)
+		self.y = clamp(0, self.y, self.bg.image.h)
 
 		for i in range(Mario.MAX_FIRE):
 			if self.is_fire[i] == True:
@@ -231,17 +234,17 @@ class Mario:
 			self.y += self.falling_speed * GameFramework.delta_time
 			self.falling_speed -= Mario.GRAVITY * GameFramework.delta_time
 		if self.life == 0:
-			if self.y < 80:
+			if self.y < 100:
 				self.jumping = False
-				self.y = 80
+				self.y = 100
 				if self.state == Mario.LEFT_JUMP:
 					self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
 				elif self.state == Mario.RIGHT_JUMP:
 					self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
 		else:
-			if self.y < 100:
+			if self.y < 120:
 				self.jumping = False
-				self.y = 100
+				self.y = 120
 				if self.state == Mario.LEFT_JUMP:
 					self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
 				elif self.state == Mario.RIGHT_JUMP:
@@ -258,7 +261,7 @@ class Mario:
 			# print(get_time())
 
 	def get_bb(self):
-		(x, y) = self.x, self.y
+		(x, y) = self.x - self.bg.window_left, self.y - self.bg.window_bottom
 		if self.life == 0:
 			(w, h) = (Mario.IMAGE_LIFE1[self.state][self.fidx % len(Mario.IMAGE_LIFE1[self.state])][2] // 2, Mario.IMAGE_LIFE1[self.state][self.fidx % len(Mario.IMAGE_LIFE1[self.state])][3] // 2)
 		else:
@@ -295,13 +298,13 @@ class Mario:
 			self.jump()
 		elif pair == Mario.KEY_LIFE1:
 			self.life = 0
-			self.y = 80
+			self.y = 100
 		elif pair == Mario.KEY_LIFE2:
 			self.life = 1
-			self.y = 100
+			self.y = 120
 		elif pair == Mario.KEY_LIFE3:
 			self.life = 2
-			self.y = 100
+			self.y = 120
 		elif pair == Mario.KEY_STAR:
 			if self.star == False:
 				self.star = True
