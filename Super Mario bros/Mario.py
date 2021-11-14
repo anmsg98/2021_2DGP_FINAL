@@ -91,12 +91,13 @@ class Mario:
 		self.dx, self.dy = 0, 0
 		self.fidx = 0
 		self.time = 0
+		self.font = load_font('resource/SuperMario3.ttf', 24)
 		self.cw, self.ch = get_canvas_width(), get_canvas_height()
 		self.driftr, self.driftl = True, True
 		self.jumping = False
 		self.jump_speed = 0
 		self.accel = 0.0
-		self.speed = 10
+		self.speed = 3
 		self.falling_speed = 0
 		self.state = Mario.RIGHT_IDLE
 		self.life = 0
@@ -114,6 +115,16 @@ class Mario:
 	def draw(self):
 		cx, cy = self.x - self.bg.window_left, self.y - self.bg.window_bottom
 		draw_rectangle(*self.get_bb())
+		self.font.draw(650, 580, "LIVES", (255, 255, 255))
+		self.font.draw(700, 550, "1", (255, 255, 255))
+		self.font.draw(510, 580, "TIME", (255, 255, 255))
+		self.font.draw(525, 550, "%d" %(999-self.time), (255, 255, 255))
+		self.font.draw(340, 580, "WORLD", (255, 255, 255))
+		self.font.draw(365, 550, "1-1", (255, 255, 255))
+		self.font.draw(180, 580, "COINS", (255, 255, 255))
+		self.font.draw(230, 550, "0", (255, 255, 255))
+		self.font.draw(20, 580, "SCORE", (255, 255, 255))
+		self.font.draw(70, 550, "0", (255, 255, 255))
 		for i in range(Mario.MAX_FIRE):
 			if self.is_fire[i] == True:
 				self.shoot_image.clip_draw(*Mario.IMAGE_FIRE[self.fidfx[i]], self.fx[i], self.fy[i])
@@ -139,7 +150,6 @@ class Mario:
 		self.bg = bg
 
 	def update(self):
-		print(self.state)
 		if self.dx > 0:
 			self.accel += 0.02
 			self.x += self.speed * self.dx * self.accel
@@ -182,9 +192,7 @@ class Mario:
 
 		for platform in GameWorld.objects_at(GameWorld.layer.platform):
 			(left, bottom, right, top) = platform.get_bb()
-
 			if (GameObject.collides_box(self, platform)):
-				print(GameObject.collides_box(self, platform), self.state)
 				# if rh >= left and lh < left and head > bottom and foot < top:
 				# 	self.x -= (rh - left)
 				# 	self.accel = 0
@@ -202,10 +210,13 @@ class Mario:
 					self.falling_speed = 0
 
 				elif foot <= top and head > top and (rh >= left or lh <= right):
-					if self.state in [Mario.RIGHT_JUMP, Mario.RIGHT_RUN, Mario.LEFT_DRIFT]:
+					print(GameObject.collides_box(self, platform), self.state)
+					if self.state in [Mario.RIGHT_JUMP, Mario.RIGHT_RUN, Mario.RIGHT_IDLE, Mario.LEFT_DRIFT]:
 						self.state = Mario.RIGHT_RUN if self.dx > 0 else Mario.RIGHT_IDLE
-					if self.state in [Mario.LEFT_JUMP, Mario.LEFT_RUN, Mario.RIGHT_DRIFT]:
+					elif self.state in [Mario.LEFT_JUMP, Mario.LEFT_RUN, Mario.LEFT_IDLE, Mario.RIGHT_DRIFT]:
 						self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
+					else:
+						return
 					self.y += (top - foot)
 					self.falling_speed = 0
 			else:
