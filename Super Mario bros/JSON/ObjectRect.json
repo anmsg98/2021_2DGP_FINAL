@@ -1,5 +1,6 @@
 {
   "ground": [0, 540, 800, 60],
+  "bb_box": [800, 0, 40, 40],
   "pipe_small": [231, 407, 32, 32],
   "pipe_middle": [193, 407, 32, 48],
   "pipe_big": [152, 407, 32, 64],
@@ -16,5 +17,6 @@
   "MysteryBox": [],
   "Coin": [],
   "Flag" : [],
-  "Goomba": []
+  "Goomba": [],
+  "Turtle": []
 }
