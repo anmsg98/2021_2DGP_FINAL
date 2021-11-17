@@ -51,8 +51,8 @@ class Background:
     #     return x, y
 
 class FixedBackground:
-    def __init__(self):
-        self.image = load_image("resource/BG.png")
+    def __init__(self, level):
+        self.image = load_image("resource/BG%d.png" % level)
         self.cw, self.ch = get_canvas_width(), get_canvas_height()
         self.window_left, self. window_bottom = 0, 0
         self.center_object = None

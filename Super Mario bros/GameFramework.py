@@ -4,12 +4,19 @@ import time
 running = True
 stack = None
 frame_interval = 0.01
+game_level = 1
+Total_coin = 0
+Time_remain = 1000
+Player_hp = 3
+Score = 0
 delta_time = 0
+
 
 def quit():
 	global running
 
 	running = False
+
 
 def run(state):
 	global running
@@ -51,6 +58,7 @@ def run(state):
 
 	close_canvas()
 
+
 def change(state):
 	global stack
 
@@ -61,6 +69,7 @@ def change(state):
 	stack.append(state)
 	state.enter()
 
+
 def push(state):
 	global stack
 
@@ -69,6 +78,7 @@ def push(state):
 
 	stack.append(state)
 	state.enter()
+
 
 def pop():
 	global stack
@@ -81,6 +91,12 @@ def pop():
 		stack[-1].exit()
 		stack.pop()
 		stack[-1].resume()
+
+
+def change_level(level):
+	global game_level
+	game_level = level
+
 
 def run_main():
 	import sys
