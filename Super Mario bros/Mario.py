@@ -111,9 +111,9 @@ class Mario:
 		self.increase_sound = load_wav("resource/life_up.wav")
 		self.clear_sound = load_wav("resource/clear.wav")
 		self.flag_sound = load_wav("resource/flag.wav")
-		self.flag_sound.set_volume(64)
-		self.clear_sound.set_volume(64)
-		self.increase_sound.set_volume(40)
+		self.flag_sound.set_volume(20)
+		self.clear_sound.set_volume(20)
+		self.increase_sound.set_volume(20)
 
 		self.fx, self.fy = [0 for i in range(Mario.MAX_FIRE)], [0 for i in range(Mario.MAX_FIRE)]
 		self.fdx = [0 for i in range(Mario.MAX_FIRE)]

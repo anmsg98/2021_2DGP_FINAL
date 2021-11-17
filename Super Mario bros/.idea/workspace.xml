@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0ed03845-3be7-4387-a8a8-71c306a9ef3a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameState.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameState2.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mario.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +47,7 @@
       <recent name="D:\2DGP\2021_2DGP_FINAL\Super Mario bros\resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.GameState2">
+  <component name="RunManager" selected="Python.TitleState">
     <configuration name="GameState (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Super Mario bros" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -157,9 +155,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.GameState2" />
-        <item itemvalue="Python.GameState (1)" />
         <item itemvalue="Python.TitleState" />
+        <item itemvalue="Python.GameState (1)" />
+        <item itemvalue="Python.GameState2" />
         <item itemvalue="Python.LogoState" />
         <item itemvalue="Python.Mario" />
       </list>
