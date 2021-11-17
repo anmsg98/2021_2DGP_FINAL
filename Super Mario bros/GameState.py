@@ -1,4 +1,5 @@
 from pico2d import *
+import GameState2
 from background import FixedBackground as Background
 from Mario import *
 import GameFramework
@@ -7,16 +8,19 @@ import GameWorld
 import GameSprite
 import json
 
-
+pause = False
+bgm = None
+time = 0
+count = 0
 def enter():
-	global mario, ground, cloud, pipe, background
-	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "goomba", "mario"])
+	global mario, ground, cloud, pipe, background, bgm
+	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "goomba", "mario", "mushroom", "flag"])
 	GameSprite.load()
 	mario = Mario()
-	GameWorld.add(6, mario)
+	GameWorld.add(6, mario, GameFramework.game_level)
 
-	background = Background()
-	GameWorld.add(0, background)
+	background = Background(GameFramework.game_level)
+	GameWorld.add(0, background, GameFramework.game_level)
 
 	background.set_center_object(mario)
 	mario.set_background(background)
@@ -26,15 +30,26 @@ def enter():
 
 	for info in data:
 		obj = GameSprite.createObject(info, mario)
-		GameWorld.add(info["layer_index"], obj)
+		GameWorld.add(info["layer_index"], obj, GameFramework.game_level)
 		obj.set_background(background)
-	GameWorld.curr_obj = GameWorld.stage_obj
+	GameWorld.curr_obj = GameWorld.stage1_obj
+	bgm = load_music('resource/bgm.mp3')
+	bgm.set_volume(64)
+	bgm.repeat_play()
 def update():
+	global time, bgm, count
 	GameWorld.update()
 	check_and_handle_collision()
+	if mario.clear:
+		bgm.stop()
+		time += GameFramework.delta_time
+		if time > 9.0:
+			GameWorld.remove(mario)
+			GameFramework.change(GameState2)
+
 def draw():
 	GameWorld.draw()
-
+	mario.draw_ui()
 def handle_event(event):
 	global running
 
@@ -78,6 +93,33 @@ def check_and_handle_collision():
 				else:
 					goomba.pos[0] -= 1
 					goomba.dir = -1
+	# 코인 충돌
+	for coin in GameWorld.objects_at(GameWorld.layer.coin):
+		if (GameObject.collides_box(mario, coin)):
+			coin.coin_sound.play()
+			GameFramework.Total_coin += 1
+			GameFramework.Score += 1000
+			coin.pos[1] += 40
+			coin.collide = True
+
+	# 버섯 충돌
+	for mushroom in GameWorld.objects_at(GameWorld.layer.mushroom):
+		if (GameObject.collides_box(mario, mushroom)):
+			if mushroom.active:
+				mario.increase_sound.play()
+				mario.life = 1
+				mario.y_default = 120
+				GameWorld.remove(mushroom)
+			else:
+				mushroom.sound.play()
+				GameFramework.Score += 300
+				mushroom.collide = True
+	# 깃발 충돌
+	for flag in GameWorld.objects_at(GameWorld.layer.flag):
+		if (GameObject.collides_box(mario, flag)):
+			mario.clear = True
+
+
 
 def exit():
 	pass
