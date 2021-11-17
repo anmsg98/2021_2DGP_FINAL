@@ -8,12 +8,14 @@ import GameWorld
 import GameSprite
 import json
 
-pause = False
+pause = None
 bgm = None
 time = 0
 count = 0
 def enter():
-	global mario, ground, cloud, pipe, background, bgm
+
+	global mario, ground, cloud, pipe, background, bgm, pause
+	pause = False
 	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "goomba", "mario", "mushroom", "flag"])
 	GameSprite.load()
 	mario = Mario()
@@ -35,30 +37,44 @@ def enter():
 	GameWorld.curr_obj = GameWorld.stage1_obj
 	bgm = load_music('resource/bgm.mp3')
 	bgm.set_volume(64)
-	bgm.repeat_play()
+	bgm.play()
 def update():
-	global time, bgm, count
-	GameWorld.update()
-	check_and_handle_collision()
-	if mario.clear:
-		bgm.stop()
-		time += GameFramework.delta_time
-		if time > 9.0:
-			GameWorld.remove(mario)
-			GameFramework.change(GameState2)
+	global time, bgm, count, pause
+	if pause == False:
+		GameWorld.update()
+
+		check_and_handle_collision()
+		if mario.clear:
+			bgm.stop()
+			time += GameFramework.delta_time
+			if time > 9.0:
+				GameWorld.remove(mario)
+				GameFramework.change(GameState2)
+	else:
+		pass
 
 def draw():
 	GameWorld.draw()
 	mario.draw_ui()
+
+
 def handle_event(event):
-	global running
+	global running, pause, bgm
 
 	if (event.type == SDL_QUIT):
 		GameFramework.quit()
 	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
 		GameFramework.pop()
+	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
+		if pause:
+			bgm.play()
+			pause = False
+		else:
+			bgm.stop()
+			pause = True
+	if pause == False:
+		mario.handle_event(event)
 
-	mario.handle_event(event)
 
 
 def check_and_handle_collision():

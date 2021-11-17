@@ -7,10 +7,14 @@ import GameWorld
 import GameSprite
 import json
 
+pause = None
 bgm = None
+
+
 def enter():
 	GameFramework.change_level(2)
-	global mario, ground, cloud, pipe, background, bgm
+	global mario, ground, cloud, pipe, background, bgm, pause
+	pause = False
 	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "goomba", "mario", "mushroom", "flag"])
 	GameSprite.load()
 	mario = Mario()
@@ -35,20 +39,30 @@ def enter():
 	bgm.repeat_play()
 
 def update():
-	GameWorld.update()
-	check_and_handle_collision()
+	global pause
+	if pause == False:
+		GameWorld.update()
+		check_and_handle_collision()
 def draw():
 	GameWorld.draw()
 	mario.draw_ui()
 def handle_event(event):
-	global running
+	global running, pause
 
 	if (event.type == SDL_QUIT):
 		GameFramework.quit()
 	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
 		GameFramework.pop()
 
-	mario.handle_event(event)
+	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
+		if pause:
+			bgm.play()
+			pause = False
+		else:
+			bgm.stop()
+			pause = True
+	if pause == False:
+		mario.handle_event(event)
 
 
 def check_and_handle_collision():

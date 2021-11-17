@@ -2,6 +2,7 @@ from pico2d import *
 import GameFramework
 import GameWorld
 import GameObject
+import GameState
 count, count2 = 0, 0
 class Mario:
 	# State
