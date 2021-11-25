@@ -15,10 +15,10 @@ def enter():
 	GameFramework.change_level(2)
 	global mario, ground, cloud, pipe, background, bgm, pause
 	pause = False
-	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "goomba", "mario", "mushroom", "flag"])
+	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "coin2", "goomba", "mario", "mushroom", "flag"])
 	GameSprite.load()
 	mario = Mario()
-	GameWorld.add(6, mario, GameFramework.game_level)
+	GameWorld.add(7, mario, GameFramework.game_level)
 
 	background = Background(GameFramework.game_level)
 	GameWorld.add(0, background, GameFramework.game_level)
@@ -105,6 +105,13 @@ def check_and_handle_collision():
 			GameFramework.Score += 1000
 			coin.pos[1] += 40
 			coin.collide = True
+
+	for coin2 in GameWorld.objects_at(GameWorld.layer.coin2):
+		if (GameObject.collides_box(mario, coin2)):
+			coin2.coin_sound.play()
+			GameFramework.Total_coin += 1
+			GameFramework.Score += 1000
+			coin2.collide = True
 
 	# 버섯 충돌
 	for mushroom in GameWorld.objects_at(GameWorld.layer.mushroom):
