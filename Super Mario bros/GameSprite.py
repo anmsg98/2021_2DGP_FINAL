@@ -15,7 +15,7 @@ def load():
 		sprite_image = load_image("resource/background.png")
 
 	if (BG_image is None):
-		BG_image = load_image("resource/BG1.png")
+		BG_image = load_image("resource/BG2.png")
 
 		with open("JSON/ObjectRect.json") as file:
 			data = json.load(file)
@@ -33,9 +33,11 @@ def createObject(info, mario):
 		obj = Box(info["name"], info["x"], info["y"], info["w"], info["h"])
 	elif ("Flag" in info["name"]):
 		obj = Flag(info["name"], info["x"], info["y"], info["w"], info["h"])
-	elif ("Coin" in info["name"]):
+	elif ("Coin" == info["name"]):
 		obj = Coin(info["name"], info["x"], info["y"])
-	elif ("Goomba" in info["name"]):
+	elif ("Coin2" == info["name"]):
+		obj = Coin2(info["name"], info["x"], info["y"])
+	elif ("Goomba" == info["name"]):
 		obj = Goomba(info["name"], info["x"], info["y"], mario)
 	elif ("ladder" in info["name"]):
 		obj = Ladder(info["name"], info["x"], info["y"], info["w"], info["h"])
@@ -224,6 +226,53 @@ class Coin:
 	def get_bb(self):
 		(x, y) = self.pos[0]-self.bg.window_left, self.pos[1]-self.bg.window_bottom
 		(w, h) = (Coin.IMAGE_RECT[0][2]*3 // 2, Coin.IMAGE_RECT[0][3]*3 // 2)
+
+		left = x-w
+		bottom = y
+		right = x + 2.5*w
+		top = y + h
+
+		return (left, bottom, right, top)
+
+
+class Coin2:
+	IMAGE_RECT = [
+		[377, 274, 8, 14],
+		[409, 274, 4, 14],
+		[438, 274, 3, 14],
+		[468, 274, 5, 14]
+	]
+	def __init__(self, name, x, y):
+		self.name = name
+		self.pos = [x, y]
+		self.bg = None
+		self.fidx = 0
+		self.collide = False
+		self.animation = 0
+		self.time = 0
+		self.coin_sound = load_wav("resource/coin.wav")
+		self.coin_sound.set_volume(10)
+
+	def draw(self):
+		cx, cy = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
+		self.time += GameFramework.delta_time
+		self.fidx = round(self.time * 10) % 4
+		sprite_image.clip_draw_to_origin(*Coin2.IMAGE_RECT[self.fidx], cx, cy,
+										 Coin2.IMAGE_RECT[self.fidx][2] * 3,  Coin2.IMAGE_RECT[self.fidx][3] * 3)
+	def set_background(self, bg):
+		self.bg = bg
+
+	def update(self):
+		if self.collide:
+			self.pos[1] = 1000
+			self.animation += GameFramework.delta_time
+			if self.animation > 0.5:
+				GameWorld.remove(self)
+
+
+	def get_bb(self):
+		(x, y) = self.pos[0]-self.bg.window_left, self.pos[1]-self.bg.window_bottom
+		(w, h) = (Coin2.IMAGE_RECT[0][2]*3 // 2, Coin2.IMAGE_RECT[0][3]*3 // 2)
 
 		left = x-w
 		bottom = y
