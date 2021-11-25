@@ -208,18 +208,6 @@ class Mario:
 			for platform in GameWorld.objects_at(GameWorld.layer.platform):
 				(left, bottom, right, top) = platform.get_bb()
 				if (GameObject.collides_box(self, platform)):
-					# if rh >= left and lh < left and head > bottom and foot < top:
-					# 	self.x -= (rh - left)
-					# 	self.accel = 0
-					# 	if self.state in [Mario.RIGHT_RUN, Mario.RIGHT_IDLE]:
-					# 		self.state = Mario.RIGHT_IDLE
-					#
-					# elif lh <= right and rh >= right and head > bottom and foot < top:
-					# 	self.x -= (rh - left)
-					# 	self.accel = 0
-					# 	if self.state in [Mario.LEFT_RUN, Mario.LEFT_IDLE]:
-					# 		self.state = Mario.LEFT_IDLE
-
 					if head >= bottom and foot < bottom and (rh >= left or lh <= right):
 						self.y -= (head-bottom) + 1
 						self.falling_speed = 0
@@ -232,8 +220,20 @@ class Mario:
 							self.state = Mario.LEFT_RUN if self.dx < 0 else Mario.LEFT_IDLE
 						else:
 							return
-						self.y += (top - foot)
+						self.y += (top - foot) + 1
 						self.falling_speed = 0
+					else :
+						if rh >= left and lh < left and head > bottom and foot < top:
+							self.x -= (rh - left) + 1
+							self.accel = 0
+							if self.state in [Mario.RIGHT_RUN, Mario.RIGHT_IDLE]:
+								self.state = Mario.RIGHT_IDLE
+
+						elif lh <= right and rh >= right and head > bottom and foot < top:
+							self.x += (right - lh) + 1
+							self.accel = 0
+							if self.state in [Mario.LEFT_RUN, Mario.LEFT_IDLE]:
+								self.state = Mario.LEFT_IDLE
 				else:
 					if self.y > self.y_default:
 						if self.dx > 0:
