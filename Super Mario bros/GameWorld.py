@@ -4,11 +4,13 @@ import GameFramework
 curr_obj = []
 stage1_obj = []
 stage2_obj = []
+stage3_obj = []
+stage4_obj = []
 trashcan = []
 
 
 def game_init(layer_names):
-    global stage1_obj, stage2_obj
+    global stage1_obj, stage2_obj, stage3_obj, stage4_obj
     global layer
 
     layer = lambda: None
@@ -17,6 +19,8 @@ def game_init(layer_names):
     for name in layer_names:
         stage1_obj.append([])
         stage2_obj.append([])
+        stage3_obj.append([])
+        stage4_obj.append([])
         layer.__dict__[name] = layerIndex
         layerIndex += 1
 
@@ -33,10 +37,14 @@ def objects_at(layer_index):
 
 
 def add(layer_index, object, level):
-	if level == 1:
-		stage1_obj[layer_index].append(object)
-	elif level == 2:
-		stage2_obj[layer_index].append(object)
+    if level == 1:
+        stage1_obj[layer_index].append(object)
+    elif level == 2:
+        stage2_obj[layer_index].append(object)
+    elif level == 3:
+        stage3_obj[layer_index].append(object)
+    elif level == 4:
+        stage4_obj[layer_index].append(object)
 
 def remove(object):
 	trashcan.append(object)
@@ -65,7 +73,7 @@ def empty_trashcan():
 	trashcan = []
 
 def clear():
-    global curr_obj, stage1_obj, stage2_obj
+    global curr_obj, stage1_obj, stage2_obj, stage3_obj, stage4_obj
 
     curr_objects = stage1_obj
     for object in all_objects(): del object
@@ -73,6 +81,14 @@ def clear():
     curr_objects = stage2_obj
     for object in all_objects(): del object
 
+    curr_objects = stage3_obj
+    for object in all_objects(): del object
+
+    curr_objects = stage4_obj
+    for object in all_objects(): del object
+
     curr_obj = []
     stage1_obj = []
     stage2_obj = []
+    stage3_obj = []
+    stage4_obj = []
