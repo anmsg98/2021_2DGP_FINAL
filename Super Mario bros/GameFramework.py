@@ -12,6 +12,15 @@ Score = 0
 delta_time = 0
 
 
+def init():
+	global game_level, Total_coin, Time_remain, Player_hp, Score
+	game_level = 1
+	Total_coin = 0
+	Time_remain = 1000
+	Player_hp = 3
+	Score = 0
+
+
 def quit():
 	global running
 
