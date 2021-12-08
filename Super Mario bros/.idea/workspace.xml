@@ -2,8 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ed03845-3be7-4387-a8a8-71c306a9ef3a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DeadState.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameOverState.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameState3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameState4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JSON/Stage3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JSON/Stage4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Super Mario bros.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Super Mario bros.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameSprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameState.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameState2.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameWorld.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameWorld.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSON/ObjectRect.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSON/ObjectRect.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSON/Stage.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSON/Stage.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSON/Stage2.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSON/Stage2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TitleState.py" beforeDir="false" afterPath="$PROJECT_DIR$/TitleState.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/BG1 - 복사본.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/BG1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/BG1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/BG2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/BG2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/BG3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/BG3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/Mario.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/Mario.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/background.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +72,48 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.GameState2">
+    <configuration name="DeadState" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Super Mario bros" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DeadState.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GameOverState" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Super Mario bros" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GameOverState.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="GameState (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Super Mario bros" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -91,7 +156,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="LogoState" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="GameState3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Super Mario bros" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -103,49 +168,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LogoState.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Mario" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Super Mario bros" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mario.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TitleState" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Super Mario bros" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TitleState.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GameState3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,9 +181,9 @@
       <list>
         <item itemvalue="Python.GameState2" />
         <item itemvalue="Python.GameState (1)" />
-        <item itemvalue="Python.Mario" />
-        <item itemvalue="Python.TitleState" />
-        <item itemvalue="Python.LogoState" />
+        <item itemvalue="Python.GameState3" />
+        <item itemvalue="Python.GameOverState" />
+        <item itemvalue="Python.DeadState" />
       </list>
     </recent_temporary>
   </component>

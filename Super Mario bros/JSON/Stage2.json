@@ -12,6 +12,8 @@
   {"name": "Coin", "layer_index": 4, "x": 570, "y": 200, "w":null,"h": null},
   {"name": "bb_box", "layer_index": 1, "x": 400, "y": 200, "w": 200, "h": 40},
 
+  {"name": "Goomba", "layer_index": 6, "x": 600, "y": 80, "w": null, "h": null},
+
   {"name": "bb_box", "layer_index": 1, "x": 680, "y": 80, "w": 40, "h": 40},
   {"name": "bb_box", "layer_index": 1, "x": 760, "y": 80, "w": 40, "h": 80},
   {"name": "bb_box", "layer_index": 1, "x": 840, "y": 80, "w": 40, "h": 120},
@@ -19,7 +21,9 @@
   {"name": "bb_box", "layer_index": 1, "x": 1000, "y": 80, "w": 40, "h": 160},
   {"name": "bb_box", "layer_index": 1, "x": 1080, "y": 80, "w": 40, "h": 120},
 
+  {"name": "Goomba", "layer_index": 6, "x": 1140, "y": 80, "w": null, "h": null},
   {"name": "MysteryBox", "layer_index": 3, "x": 1160, "y": 240, "w": 40, "h": 40},
+  {"name": "Coin", "layer_index": 4, "x": 1170, "y": 240, "w":null,"h": null},
   {"name": "bb_box", "layer_index": 1, "x": 1160, "y": 240, "w": 40, "h": 40},
 
   {"name": "bb_box", "layer_index": 1, "x": 1240, "y": 80, "w": 40, "h": 120},
@@ -31,20 +35,24 @@
   {"name": "Coin2", "layer_index": 5, "x": 1700, "y": 400, "w":null,"h": null},
   {"name": "Coin2", "layer_index": 5, "x": 1740, "y": 400, "w":null,"h": null},
   {"name": "Coin2", "layer_index": 5, "x": 1780, "y": 400, "w":null,"h": null},
-
+  {"name": "Goomba", "layer_index": 6, "x": 2080, "y": 80, "w": null, "h": null},
   {"name": "bb_box", "layer_index": 1, "x": 2080, "y": 200, "w": 80, "h": 200},
   {"name": "bb_box", "layer_index": 1, "x": 2160, "y": 400, "w": 80, "h": 80},
   {"name": "bb_box", "layer_index": 1, "x": 2160, "y": 120, "w": 80, "h": 120},
 
   {"name": "bb_box", "layer_index": 1, "x": 2320, "y": 400, "w": 240, "h": 80},
   {"name": "bb_box", "layer_index": 1, "x": 2320, "y": 200, "w": 240, "h": 40},
+  {"name": "Coin2", "layer_index": 5, "x": 2330, "y": 240, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 2370, "y": 240, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 2410, "y": 240, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 2450, "y": 240, "w":null,"h": null},
   {"name": "bb_box", "layer_index": 1, "x": 2480, "y": 240, "w": 80, "h": 160},
 
   {"name": "bb_box", "layer_index": 1, "x": 2640, "y": 400, "w": 160, "h": 80},
   {"name": "bb_box", "layer_index": 1, "x": 2680, "y": 240, "w": 40, "h": 160},
   {"name": "bb_box", "layer_index": 1, "x": 2680, "y": 200, "w": 120, "h": 40},
   {"name": "bb_box", "layer_index": 1, "x": 2760, "y": 240, "w": 40, "h": 40},
-
+  {"name": "Goomba", "layer_index": 6, "x": 2850, "y": 80, "w": null, "h": null},
   {"name": "bb_box", "layer_index": 1, "x": 2880, "y": 200, "w": 80, "h": 200},
 
   {"name": "bb_box", "layer_index": 1, "x": 3040, "y": 400, "w": 160, "h": 80},
@@ -52,7 +60,15 @@
 
   {"name": "bb_box", "layer_index": 1, "x": 3360, "y": 240, "w": 240, "h": 80},
 
+  {"name": "Coin2", "layer_index": 5, "x": 3380, "y": 360, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 3420, "y": 360, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 3460, "y": 360, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 3500, "y": 360, "w":null,"h": null},
+  {"name": "Coin2", "layer_index": 5, "x": 3540, "y": 360, "w":null,"h": null},
+
   {"name": "pipe_middle", "layer_index": 1, "x": 4120, "y": 80, "w": 80, "h": 120},
+  {"name": "Goomba", "layer_index": 6, "x": 4240, "y": 80, "w": null, "h": null},
+  {"name": "Goomba", "layer_index": 6, "x": 4260, "y": 80, "w": null, "h": null},
   {"name": "pipe_big", "layer_index": 1, "x": 4360, "y": 80, "w": 80, "h": 160},
   {"name": "pipe_small", "layer_index": 1, "x": 4600, "y": 80, "w": 80, "h": 80},
 
@@ -73,5 +89,7 @@
   {"name": "bb_box", "layer_index": 1, "x": 5800, "y": 240, "w": 240, "h": 40},
 
   {"name": "bb_box", "layer_index": 1, "x": 6400, "y": 80, "w": 400, "h": 120},
-  {"name": "bb_box", "layer_index": 1, "x": 6440, "y": 480, "w": 280, "h": 40}
+  {"name": "bb_box", "layer_index": 1, "x": 6440, "y": 480, "w": 280, "h": 40},
+
+  {"name": "pipe_bent", "layer_index": 9, "x": 6635, "y": 199, "w": 160, "h": 320}
 ]

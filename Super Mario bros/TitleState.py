@@ -4,7 +4,7 @@ import GameState
 
 def enter():
 	global background
-
+	GameFramework.init()
 	background = load_image("resource/Title.png")
 
 def update():
@@ -25,7 +25,6 @@ def handle_event(event):
 
 def exit():
 	global background
-	del background
 
 def pause():
 	pass
