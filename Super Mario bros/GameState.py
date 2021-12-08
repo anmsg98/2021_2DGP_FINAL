@@ -1,5 +1,6 @@
 from pico2d import *
 import GameState2
+import TitleState
 from background import FixedBackground as Background
 from Mario import *
 import GameFramework
@@ -8,13 +9,13 @@ import GameWorld
 import GameSprite
 import json
 
+mario = None
 pause = None
 bgm = None
 time = 0
 count = 0
 def enter():
-
-	global mario, ground, cloud, pipe, background, bgm, pause
+	global mario, ground, cloud, pipe, background, bgm, pause, kill_sound
 	pause = False
 	GameWorld.game_init(["bg", "platform", "block", "itembox", "coin", "goomba", "mario", "mushroom", "flag"])
 	GameSprite.load()
@@ -26,7 +27,6 @@ def enter():
 
 	background.set_center_object(mario)
 	mario.set_background(background)
-
 	with open("JSON/Stage.json") as file:
 		data = json.load(file)
 
@@ -36,20 +36,22 @@ def enter():
 		obj.set_background(background)
 	GameWorld.curr_obj = GameWorld.stage1_obj
 	bgm = load_music('resource/bgm.mp3')
-	bgm.set_volume(64)
+	kill_sound = load_wav('resource/kill.wav')
+	kill_sound.set_volume(200)
+	bgm.set_volume(200)
 	bgm.play()
 def update():
-	global time, bgm, count, pause
+	global time, bgm, count, pause, mario
 	if pause == False:
-		GameWorld.update()
-
-		check_and_handle_collision()
+		if mario.dead == False:
+			check_and_handle_collision()
 		if mario.clear:
 			bgm.stop()
 			time += GameFramework.delta_time
 			if time > 9.0:
-				GameWorld.remove(mario)
+				GameWorld.clear()
 				GameFramework.change(GameState2)
+		GameWorld.update()
 	else:
 		pass
 
@@ -64,7 +66,9 @@ def handle_event(event):
 	if (event.type == SDL_QUIT):
 		GameFramework.quit()
 	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
-		GameFramework.pop()
+		bgm.stop()
+		GameWorld.clear()
+		GameFramework.change(TitleState)
 	elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
 		if pause:
 			bgm.play()
@@ -78,13 +82,30 @@ def handle_event(event):
 
 
 def check_and_handle_collision():
-	global mario
+	global mario, kill_sound
 	(lh, foot, rh, head) = mario.get_bb()
 
 	# 굼바 충돌
 	for goomba in GameWorld.objects_at(GameWorld.layer.goomba):
-		if (GameObject.collides_box(mario, goomba)):
-			goomba.is_collide = True
+		(left, bottom, right, top) = goomba.get_bb()
+		if goomba.is_collide == False:
+			if (GameObject.collides_box(mario, goomba)):
+				if foot >= top - 20:
+					GameFramework.Score += 1000
+					kill_sound.play()
+					goomba.is_collide = True
+				else:
+					mario.life -= 1
+					if mario.life == 0:
+						mario.y_default = 100
+						mario.y = 100
+					if mario.life < 0:
+						mario.falling_speed = Mario.JUMP
+						bgm.stop()
+						mario.life = 0
+						mario.dead = True
+
+
 		# 굼바 & 플랫폼 충돌
 
 	# 일반 박스 충돌
@@ -99,6 +120,7 @@ def check_and_handle_collision():
 		if (GameObject.collides_box(mario, itembox)):
 			if head >= bottom and foot < bottom:
 				itembox.is_collide = True
+
 	for goomba in GameWorld.objects_at(GameWorld.layer.goomba):
 		for platform in GameWorld.objects_at(GameWorld.layer.platform):
 			(left, bottom, right, top) = platform.get_bb()

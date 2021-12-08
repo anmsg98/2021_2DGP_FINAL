@@ -15,7 +15,7 @@ def load():
 		sprite_image = load_image("resource/background.png")
 
 	if (BG_image is None):
-		BG_image = load_image("resource/BG2.png")
+		BG_image = load_image("resource/BG1.png")
 
 		with open("JSON/ObjectRect.json") as file:
 			data = json.load(file)
@@ -60,7 +60,6 @@ class Platform:
 	def draw(self):
 		cx, cy = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
 		sprite_image.clip_draw_to_origin(*self.rect, cx, cy, *self.size)
-		draw_rectangle(*self.get_bb())
 	def update(self):
 		pass
 
@@ -96,7 +95,7 @@ class Box:
 	def draw(self):
 		cx, cy = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
 		sprite_image.clip_draw_to_origin(*Box.IMAGE_RECT[0], cx, cy, *self.size)
-		# draw_rectangle(*self.get_bb())
+
 	def update(self):
 		if self.is_collide:
 			self.time += GameFramework.delta_time
@@ -151,7 +150,7 @@ class MysteryBox:
 		else:
 			self.fidx = 3
 		sprite_image.clip_draw_to_origin(*MysteryBox.IMAGE_RECT[self.fidx], cx, cy, *self.size)
-		# draw_rectangle(*self.get_bb())
+
 
 	def update(self):
 		if self.active:
@@ -199,7 +198,7 @@ class Coin:
 		self.speed = 300
 		self.time = 0
 		self.coin_sound = load_wav("resource/coin.wav")
-		self.coin_sound.set_volume(10)
+		self.coin_sound.set_volume(40)
 
 	def draw(self):
 		cx, cy = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
@@ -299,7 +298,7 @@ class Mushroom:
 		self.speed = 100
 		self.time = 0
 		self.sound = load_wav("resource/item.wav")
-		self.sound.set_volume(40)
+		self.sound.set_volume(100)
 
 	def draw(self):
 		cx, cy = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
@@ -361,7 +360,6 @@ class Flag:
 		else:
 			self.fidx = 0
 		sprite_image.clip_draw_to_origin(*Flag.IMAGE_RECT[self.fidx], cx, cy, *self.size)
-		draw_rectangle(*self.get_bb())
 
 	def update(self):
 		pass
@@ -412,7 +410,6 @@ class Goomba:
 			self.fidx = 2
 		sprite_image.clip_draw_to_origin(*Goomba.IMAGE_RECT[self.fidx], cx, cy,
 										 Goomba.IMAGE_RECT[self.fidx][2] * 2, Goomba.IMAGE_RECT[self.fidx][3] * 2)
-		draw_rectangle(*self.get_bb())
 	def get_bb(self):
 		(x, y) = self.pos[0]-self.bg.window_left, self.pos[1]-self.bg.window_bottom
 		(w, h) = (Goomba.IMAGE_RECT[self.fidx][2]*2 // 2, Goomba.IMAGE_RECT[self.fidx][3]*2 // 2)
@@ -453,7 +450,6 @@ class Ladder:
 		cx, cy = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
 		self.time += GameFramework.delta_time
 		sprite_image.clip_draw_to_origin(*Ladder.IMAGE_RECT[self.fidx], cx, cy, *self.size)
-		draw_rectangle(*self.get_bb())
 
 	def get_bb(self):
 		(x, y) = self.pos[0] - self.bg.window_left, self.pos[1] - self.bg.window_bottom
