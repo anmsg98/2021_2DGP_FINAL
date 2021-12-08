@@ -1,0 +1,15 @@
+[
+  {"name": "bb_box", "layer_index": 1, "x": 120, "y": 80, "w": 80, "h": 80},
+
+  {"name": "bb_box", "layer_index": 1, "x": 200, "y": 80, "w": 40, "h": 40},
+  {"name": "bb_box", "layer_index": 1, "x": 240, "y": 80, "w": 40, "h": 80},
+  {"name": "bb_box", "layer_index": 1, "x": 280, "y": 80, "w": 40, "h": 120},
+  {"name": "bb_box", "layer_index": 1, "x": 320, "y": 80, "w": 40, "h": 160},
+  {"name": "bb_box", "layer_index": 1, "x": 360, "y": 80, "w": 40, "h": 200},
+  {"name": "bb_box", "layer_index": 1, "x": 400, "y": 80, "w": 40, "h": 240},
+  {"name": "bb_box", "layer_index": 1, "x": 440, "y": 80, "w": 40, "h": 280},
+  {"name": "bb_box", "layer_index": 1, "x": 480, "y": 80, "w": 40, "h": 320},
+  {"name": "bb_box", "layer_index": 1, "x": 520, "y": 80, "w": 40, "h": 320},
+
+  {"name": "Flag", "layer_index": 2, "x": 880, "y": 80, "w": 40, "h": 420}
+]
